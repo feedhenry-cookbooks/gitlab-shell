@@ -1,9 +1,7 @@
 gitlab-shell Cookbook
 =====================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Chef cookbook for gitlab shell https://github.com/gitlabhq/gitlab-shell
 
 Requirements
 ------------
@@ -19,6 +17,7 @@ TODO: List your cookbook attributes here.
 
 e.g.
 #### gitlab-shell::default
+
 <table>
   <tr>
     <th>Key</th>
@@ -27,19 +26,95 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['gitlab-shell']['bacon']</tt></td>
+    <td><tt>['gitlab-shell']['user']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell User</td>
+    <td><tt>"git"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['group']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell User group</td>
+    <td><tt>"git"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['home']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell home directory</td>
+    <td><tt>"/home/git"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['shell_repository']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell git repo location</td>
+  <td><tt>"https://github.com/gitlabhq/gitlab-shell.git"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['shell_revision']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell git repo ref to checkout/install</td>
+    <td><tt>"master"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['repos_path']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell git repositories path</td>
+  <td><tt>"#{node['gitlab-shell']['home']}/repositories"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['shell_path']</tt></td>
+    <td>String</td>
+    <td>Gitlab Shell ssh script run via authorized_keys</td>
+    <td><tt>"#{node['gitlab-shell']['home']}/gitlab-shell"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['redis_path']</tt></td>
+    <td>String</td>
+    <td>Redis cli location</td>
+    <td><tt>"/usr/local/bin/redis-cli"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['redis_host']</tt></td>
+    <td>String</td>
+    <td>Redis Host</td>
+    <td><tt>"127.0.0.1"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['redis_port']</tt></td>
+    <td>String</td>
+    <td>Redis Port</td>
+    <td><tt>"6379"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['redis_database']</tt></td>
+    <td>String</td>
+    <td>Redis Database</td>
+    <td><tt>nil # Default value is 0</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['namespace']</tt></td>
+    <td>String</td>
+    <td>Redis Namespace</td>
+    <td><tt>"resque:gitlab"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['self_signed_cert']</tt></td>
     <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td>Use self signed cert</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['gitlab-shell']['url']</tt></td>
+    <td>String</td>
+    <td>Gitlab callback host for auth and key checks</td>
+    <td><tt>"http://localhost:3000/"</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### gitlab-shell::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
 Just include `gitlab-shell` in your node's `run_list`:
 
 ```json
@@ -53,9 +128,7 @@ Just include `gitlab-shell` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
