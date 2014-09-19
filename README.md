@@ -5,17 +5,14 @@ Chef cookbook for gitlab shell https://github.com/gitlabhq/gitlab-shell
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - gitlab-shell needs toaster to brown your bagel.
+### Platforms
+
+- Ubuntu
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### gitlab-shell::default
 
 <table>
@@ -129,7 +126,7 @@ Just include `gitlab-shell` in your node's `run_list`:
 Contributing
 ------------
 
-1. Fork the repository on Github
+1. Fork the repository on Github https://github.com/feedhenry-cookbooks/gitlab-shell
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
 4. Write tests for your change (if applicable)
@@ -138,4 +135,4 @@ Contributing
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: david.martin@feedhenry.com https://github.com/david-martin
