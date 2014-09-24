@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.3.1
+-----
+- Updated license to MIT 
+
 0.1.0
 -----
 - david.martin@feedhenry.com - Initial release of gitlab-shell
