@@ -14,3 +14,40 @@ default['gitlab-shell']['redis_database'] = nil # Default value is 0
 default['gitlab-shell']['namespace']  = "resque:gitlab"
 default['gitlab-shell']['self_signed_cert'] = false
 default['gitlab-shell']['url'] = "http://localhost:3000/"
+
+# Ruby setup
+include_attribute 'ruby_build'
+default['ruby_build']['upgrade'] = 'sync'
+default['gitlab-shell']['install_ruby'] = '1.9.3-p484'
+default['gitlab-shell']['install_ruby_path'] = node['gitlab-shell']['home']
+default['gitlab-shell']['cookbook_dependencies'] = %w(
+  zlib readline ncurses openssh
+  logrotate ruby_build
+)
+
+# Required packages for Gitlab
+case node['platform_family']
+when 'debian'
+  default['gitlab-shell']['packages'] = %w(
+    libyaml-dev libssl-dev libgdbm-dev libffi-dev checkinstall
+    curl libcurl4-openssl-dev libicu-dev wget python-docutils sudo
+  )
+when 'rhel'
+  default['gitlab-shell']['packages'] = %w(
+    libyaml-devel openssl-devel gdbm-devel libffi-devel
+    curl libcurl-devel libicu-devel wget python-docutils sudo
+  )
+else
+  default['gitlab-shell']['install_ruby'] = 'package'
+  default['gitlab-shell']['cookbook_dependencies'] = %w(
+    openssh readline zlib ruby_build
+  )
+  default['gitlab-shell']['packages'] = %w(
+    autoconf binon flex gcc gcc-c++ make m4
+    git
+    zlib1g-dev libyaml-dev libssl-dev libgdbm-dev
+    libreadline-dev libncurses5-dev libffi-dev curl git-core openssh-server
+    checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev
+    libicu-dev python-docutils sudo
+  )
+end
