@@ -88,7 +88,13 @@ template File.join(gitlab_shell['shell_path'], "config.yml") do
     :redis_port => gitlab_shell['redis_port'],
     :redis_database => gitlab_shell['redis_database'],
     :namespace => gitlab_shell['namespace'],
-    :self_signed_cert => gitlab_shell['self_signed_cert']
+    :self_signed_cert => gitlab_shell['self_signed_cert'],
+    :rabbit_enabled => gitlab_shell['rabbit_enabled'],
+    :rabbit_hosts => gitlab_shell['rabbit_hosts'],
+    :rabbit_vhost => gitlab_shell['rabbit_vhost'],
+    :rabbit_user => gitlab_shell['rabbit_user'],
+    :rabbit_password => gitlab_shell['rabbit_password'],
+    :rabbit_queue => gitlab_shell['rabbit_queue']
   })
 end
 

@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.0
+-----
+- Added rabbit config
+
 0.3.1
 -----
 - Updated license to MIT 
