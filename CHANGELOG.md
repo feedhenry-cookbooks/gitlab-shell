@@ -3,9 +3,9 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
-0.5.1
+0.5.2
 -----
-- Fixed multiple rabbit hosts formatting in config.yml
+- Fixed multiple rabbit hosts formatting in config.yml (take 2)
 
 0.5.0
 -----

@@ -39,7 +39,7 @@ redis:
 rabbit:
   enabled: <%= @rabbit_enabled %>
   hosts:
-  <% @rabbit_hosts.each do |host| %>    - <%= host %>
+<% @rabbit_hosts.each do |host| %>    - <%= host %>
   <% end %>
   vhost: <%= @rabbit_vhost %>
   user: <%= @rabbit_user %>
