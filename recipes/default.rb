@@ -56,7 +56,7 @@ if gitlab_shell['install_ruby'] !~ /package/
   end
 
   # Install required Ruby Gems for Gitlab with ~git/bin/gem
-  %w(charlock_holmes bundler).each do |gempkg|
+  %w(charlock_holmes bundler bunny).each do |gempkg|
     gem_package gempkg do
       gem_binary "#{gitlab_shell['install_ruby_path']}/bin/gem"
       action :install
@@ -65,7 +65,7 @@ if gitlab_shell['install_ruby'] !~ /package/
   end
 else
   # Install required Ruby Gems for Gitlab with system gem
-  %w(charlock_holmes bundler).each do |gempkg|
+  %w(charlock_holmes bundler bunny).each do |gempkg|
     gem_package gempkg do
       action :install
       options('--no-ri --no-rdoc')
@@ -73,16 +73,16 @@ else
   end
 end
 
-bundler_binary = "#{gitlab_shell['install_ruby_path']}/bin/bundle"
-
-# Install Gems with bundle install
-execute 'gitlab-shell-bundle-install' do
-  command "#{bundler_binary} install --deployment --binstubs --without development test"
-  cwd gitlab_shell['shell_path']
-  user gitlab_shell['user']
-  group gitlab_shell['group']
-  environment('LANG' => 'en_US.UTF-8', 'LC_ALL' => 'en_US.UTF-8')
-end
+# bundler_binary = "#{gitlab_shell['install_ruby_path']}/bin/bundle"
+# TODO: allow gitlab shell scripts to work with bundler... maybe
+# # Install Gems with bundle install
+# execute 'gitlab-shell-bundle-install' do
+#   command "#{bundler_binary} install --deployment --binstubs --without development test"
+#   cwd gitlab_shell['shell_path']
+#   user gitlab_shell['user']
+#   group gitlab_shell['group']
+#   environment('LANG' => 'en_US.UTF-8', 'LC_ALL' => 'en_US.UTF-8')
+# end
 
 ## Edit config and replace gitlab_url
 template File.join(gitlab_shell['shell_path'], "config.yml") do
