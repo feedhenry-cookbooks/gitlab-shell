@@ -45,7 +45,7 @@ if gitlab_shell['install_ruby'] !~ /package/
   ruby_build_ruby gitlab_shell['install_ruby'] do
     prefix_path gitlab_shell['install_ruby_path']
     user gitlab_shell['user']
-    group gitlab_shell['user']
+    group gitlab_shell['group']
   end
 
   # This hack put here to reliably find Ruby
@@ -71,6 +71,17 @@ else
       options('--no-ri --no-rdoc')
     end
   end
+end
+
+bundler_binary = "#{gitlab_shell['install_ruby_path']}/bin/bundle"
+
+# Install Gems with bundle install
+execute 'gitlab-shell-bundle-install' do
+  command "#{bundler_binary} install --deployment --binstubs --without development test"
+  cwd gitlab_shell['shell_path']
+  user gitlab_shell['user']
+  group gitlab_shell['group']
+  environment('LANG' => 'en_US.UTF-8', 'LC_ALL' => 'en_US.UTF-8')
 end
 
 ## Edit config and replace gitlab_url

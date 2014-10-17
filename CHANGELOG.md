@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.3
+-----
+- Added bundle install to recipe
+
 0.5.2
 -----
 - Fixed multiple rabbit hosts formatting in config.yml (take 2)
