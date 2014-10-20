@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.5
+-----
+- Use priority 9 for ruby update-alternatives
+
 0.5.4
 -----
 - Removed bundle install from recipe in favor of gem install of bunny

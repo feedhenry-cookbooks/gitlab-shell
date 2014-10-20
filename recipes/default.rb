@@ -51,7 +51,7 @@ if gitlab_shell['install_ruby'] !~ /package/
   # This hack put here to reliably find Ruby
   # cross-platform. Issue #66
   execute 'update-alternatives-ruby' do
-    command "update-alternatives --install /usr/local/bin/ruby ruby #{gitlab_shell['install_ruby_path']}/bin/ruby 10"
+    command "update-alternatives --install /usr/local/bin/ruby ruby #{gitlab_shell['install_ruby_path']}/bin/ruby 9"
     not_if { ::File.exist?('/usr/local/bin/ruby') }
   end
 
