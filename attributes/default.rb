@@ -32,8 +32,7 @@ default['ruby_build']['upgrade'] = 'sync'
 default['gitlab-shell']['install_ruby'] = '1.9.3-p484'
 default['gitlab-shell']['install_ruby_path'] = node['gitlab-shell']['home']
 default['gitlab-shell']['cookbook_dependencies'] = %w(
-  zlib readline ncurses openssh
-  logrotate ruby_build
+  zlib readline ncurses logrotate ruby_build
 )
 
 # Required packages for Gitlab
@@ -51,13 +50,13 @@ when 'rhel'
 else
   default['gitlab-shell']['install_ruby'] = 'package'
   default['gitlab-shell']['cookbook_dependencies'] = %w(
-    openssh readline zlib ruby_build
+    readline zlib ruby_build
   )
   default['gitlab-shell']['packages'] = %w(
     autoconf binon flex gcc gcc-c++ make m4
     git
     zlib1g-dev libyaml-dev libssl-dev libgdbm-dev
-    libreadline-dev libncurses5-dev libffi-dev curl git-core openssh-server
+    libreadline-dev libncurses5-dev libffi-dev curl git-core
     checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev
     libicu-dev python-docutils sudo
   )
