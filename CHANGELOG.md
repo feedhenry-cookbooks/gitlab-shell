@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.7
+-----
+- Removed dependency on unnecessary cookbooks
+
 0.5.6
 -----
 - Manually set ruby alternative version
