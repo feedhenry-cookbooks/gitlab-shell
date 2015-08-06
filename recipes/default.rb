@@ -98,6 +98,7 @@ directory "Repositories path" do
   owner gitlab_shell['user']
   group gitlab_shell['group']
   mode 02770
+  recursive true
 end
 
 directory "SSH key directory" do
