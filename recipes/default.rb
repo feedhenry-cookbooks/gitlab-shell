@@ -45,18 +45,21 @@ if gitlab_shell['install_ruby'] !~ /package/
   ruby_build_ruby gitlab_shell['install_ruby'] do
     prefix_path gitlab_shell['install_ruby_path']
     user gitlab_shell['user']
-    group gitlab_shell['user']
+    group gitlab_shell['group']
   end
 
-  # This hack put here to reliably find Ruby
-  # cross-platform. Issue #66
-  execute 'update-alternatives-ruby' do
-    command "update-alternatives --install /usr/local/bin/ruby ruby #{gitlab_shell['install_ruby_path']}/bin/ruby 10"
+  execute 'update-alternatives-ruby-install' do
+    command "update-alternatives --install /usr/local/bin/ruby ruby #{gitlab_shell['install_ruby_path']}/bin/ruby 1000"
     not_if { ::File.exist?('/usr/local/bin/ruby') }
   end
 
+  # manually set ruby version just in case
+  execute 'update-alternatives-ruby-set' do
+    command "update-alternatives --set ruby #{gitlab_shell['install_ruby_path']}/bin/ruby"
+  end
+
   # Install required Ruby Gems for Gitlab with ~git/bin/gem
-  %w(charlock_holmes bundler).each do |gempkg|
+  %w(charlock_holmes bundler bunny).each do |gempkg|
     gem_package gempkg do
       gem_binary "#{gitlab_shell['install_ruby_path']}/bin/gem"
       action :install
@@ -65,13 +68,24 @@ if gitlab_shell['install_ruby'] !~ /package/
   end
 else
   # Install required Ruby Gems for Gitlab with system gem
-  %w(charlock_holmes bundler).each do |gempkg|
+  %w(charlock_holmes bundler bunny).each do |gempkg|
     gem_package gempkg do
       action :install
       options('--no-ri --no-rdoc')
     end
   end
 end
+
+# bundler_binary = "#{gitlab_shell['install_ruby_path']}/bin/bundle"
+# TODO: allow gitlab shell scripts to work with bundler... maybe
+# # Install Gems with bundle install
+# execute 'gitlab-shell-bundle-install' do
+#   command "#{bundler_binary} install --deployment --binstubs --without development test"
+#   cwd gitlab_shell['shell_path']
+#   user gitlab_shell['user']
+#   group gitlab_shell['group']
+#   environment('LANG' => 'en_US.UTF-8', 'LC_ALL' => 'en_US.UTF-8')
+# end
 
 ## Edit config and replace gitlab_url
 template File.join(gitlab_shell['shell_path'], "config.yml") do
@@ -88,7 +102,13 @@ template File.join(gitlab_shell['shell_path'], "config.yml") do
     :redis_port => gitlab_shell['redis_port'],
     :redis_database => gitlab_shell['redis_database'],
     :namespace => gitlab_shell['namespace'],
-    :self_signed_cert => gitlab_shell['self_signed_cert']
+    :self_signed_cert => gitlab_shell['self_signed_cert'],
+    :rabbit_enabled => gitlab_shell['rabbit_enabled'],
+    :rabbit_hosts => gitlab_shell['rabbit_hosts'],
+    :rabbit_vhost => gitlab_shell['rabbit_vhost'],
+    :rabbit_user => gitlab_shell['rabbit_user'],
+    :rabbit_password => gitlab_shell['rabbit_password'],
+    :rabbit_queue => gitlab_shell['rabbit_queue']
   })
 end
 

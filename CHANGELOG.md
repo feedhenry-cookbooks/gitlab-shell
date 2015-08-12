@@ -3,6 +3,38 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.8
+-----
+- Removed refs to openssh
+
+0.5.7
+-----
+- Removed dependency on unnecessary cookbooks
+
+0.5.6
+-----
+- Manually set ruby alternative version
+
+0.5.5
+-----
+- Use priority 9 for ruby update-alternatives
+
+0.5.4
+-----
+- Removed bundle install from recipe in favor of gem install of bunny
+
+0.5.3
+-----
+- Added bundle install to recipe
+
+0.5.2
+-----
+- Fixed multiple rabbit hosts formatting in config.yml (take 2)
+
+0.5.0
+-----
+- Added rabbit config
+
 0.3.1
 -----
 - Updated license to MIT 
