@@ -59,19 +59,21 @@ if gitlab_shell['install_ruby'] !~ /package/
   end
 
   # Install required Ruby Gems for Gitlab with ~git/bin/gem
-  %w(charlock_holmes bundler bunny).each do |gempkg|
-    gem_package gempkg do
+  %w(charlock_holmes:0.7.3 bundler:1.9.9 bunny:1.7.0).each do |gempkg|
+    gem_package gempkg.split(':')[0] do
       gem_binary "#{gitlab_shell['install_ruby_path']}/bin/gem"
       action :install
       options('--no-ri --no-rdoc')
+      version gempkg.split(':')[1]
     end
   end
 else
   # Install required Ruby Gems for Gitlab with system gem
-  %w(charlock_holmes bundler bunny).each do |gempkg|
-    gem_package gempkg do
+  %w(charlock_holmes:0.7.3 bundler:1.9.9 bunny:1.7.0).each do |gempkg|
+    gem_package gempkg.split(':')[0] do
       action :install
       options('--no-ri --no-rdoc')
+      version gempkg.split(':')[1]
     end
   end
 end
