@@ -3,6 +3,10 @@ gitlab-shell CHANGELOG
 
 This file is used to list changes made in each version of the gitlab-shell cookbook.
 
+0.5.9
+----
+- Fix versions of gems to ensure compatibility with ruby 1.9
+
 0.5.8
 -----
 - Removed refs to openssh
